@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Abenezer Abebe, aspiring web developer. Portfolio and learning journey.">
+  <title>Abenezer Abebe | Web Developer in Training</title>
+
+  <!-- ===== CSS ===== -->
+  <style>
+    :root {
+      --bg: #f5f8fb; --text: #14202e; --muted: #5a6b7d;
+      --main: #0f5c57; --accent: #ffc83d; --card: #ffffff; --line: #dbe3ea;
+    }
+    body.dark {
+      --bg: #0c1620; --text: #e8eef4; --muted: #9bacbd;
+      --main: #5fd0c5; --card: #14232f; --line: #24384a;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 70px; }
+    body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+           background: var(--bg); color: var(--text); line-height: 1.65; }
+    a { color: var(--main); }
+    .wrap { max-width: 860px; margin: auto; padding: 0 20px; }
+
+    /* Header */
+    header { position: sticky; top: 0; z-index: 10; background: var(--card);
+             border-bottom: 1px solid var(--line); }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 58px; }
+    .logo { font-weight: 800; font-size: 1.1rem; color: var(--text); text-decoration: none; }
+    .links { display: flex; gap: 18px; align-items: center; }
+    .links a { text-decoration: none; color: var(--muted); font-weight: 600; font-size: .95rem; }
+    .links a:hover { color: var(--main); }
+    .icon-btn { background: none; border: 1px solid var(--line); color: var(--text);
+                width: 38px; height: 38px; border-radius: 10px; font-size: 1.1rem; cursor: pointer; }
+    #menuBtn { display: none; }
+    @media (max-width: 640px) {
+      #menuBtn { display: block; }
+      .links { display: none; position: absolute; top: 58px; left: 0; right: 0;
+               flex-direction: column; align-items: flex-start; gap: 0;
+               background: var(--card); border-bottom: 1px solid var(--line); padding: 8px 20px; }
+      .links.open { display: flex; }
+      .links a { padding: 10px 0; width: 100%; }
+    }
+
+    /* Hero */
+    .hero { padding: 64px 0 40px; }
+    .hero small { color: var(--main); font-weight: 700; }
+    .hero h1 { font-size: clamp(2rem, 7vw, 3.2rem); line-height: 1.15; margin: 8px 0 14px; }
+    .hero p { color: var(--muted); max-width: 560px; font-size: 1.1rem; }
+    #typed { border-right: 3px solid var(--accent); padding-right: 4px; }
+    .btn { display: inline-block; background: var(--accent); color: #14202e; border: 0;
+           padding: 12px 22px; border-radius: 10px; font-weight: 700; font-size: 1rem;
+           text-decoration: none; cursor: pointer; margin: 8px 10px 0 0; }
+    .btn.ghost { background: none; color: var(--text); border: 2px solid var(--line); }
+
+    /* Sections */
+    section { padding: 44px 0; }
+    h2 { font-size: 1.6rem; margin: 0 0 20px; border-left: 6px solid var(--accent); padding-left: 12px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .stats div { text-align: center; padding: 14px 6px; background: var(--card);
+                 border: 1px solid var(--line); border-radius: 12px; }
+    .stats b { display: block; font-size: 1.6rem; color: var(--main); }
+    .stats span { font-size: .85rem; color: var(--muted); }
+    img { max-width: 100%; border-radius: 12px; display: block; }
+
+    /* Skills */
+    .skill { margin-bottom: 16px; }
+    .skill-top { display: flex; justify-content: space-between; font-weight: 600; }
+    .bar { height: 10px; background: var(--line); border-radius: 6px; overflow: hidden; margin-top: 6px; }
+    .bar i { display: block; height: 100%; width: 0; background: var(--main);
+             border-radius: 6px; transition: width 1.2s ease; }
+
+    /* Projects */
+    .tag { display: inline-block; font-size: .78rem; padding: 2px 10px; border-radius: 20px;
+           background: var(--line); color: var(--muted); margin: 8px 6px 0 0; }
+    .card h3 { margin: 0 0 6px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    /* Roadmap */
+    table { width: 100%; border-collapse: collapse; background: var(--card);
+            border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--line); }
+    th { background: var(--main); color: #fff; }
+    body.dark th { color: #0c1620; }
+    td.done { color: var(--main); font-weight: 700; }
+    .check { list-style: none; padding: 0; margin: 0; }
+    .check li { padding: 6px 0; }
+    #progressBar { margin-top: 10px; }
+
+    /* Contact */
+    label { font-weight: 600; display: block; margin: 12px 0 4px; }
+    input, textarea { width: 100%; padding: 11px; border: 2px solid var(--line); border-radius: 10px;
+                      font: inherit; background: var(--bg); color: var(--text); }
+    input:focus, textarea:focus { outline: none; border-color: var(--main); }
+    #formMsg { font-weight: 700; margin-top: 12px; }
+    .ok { color: var(--main); } .err { color: #d6336c; }
+    footer { text-align: center; padding: 30px 20px; color: var(--muted);
+             border-top: 1px solid var(--line); margin-top: 30px; }
+    #toTop { position: fixed; right: 18px; bottom: 18px; display: none; }
+  </style>
+</head>
+
+<!-- ===== HTML ===== -->
+<body>
+  <header>
+    <nav class="wrap">
+      <a class="logo" href="#top">Abenezer<span style="color:var(--accent)">.</span></a>
+      <div class="links" id="links">
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#journey">Journey</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <button class="icon-btn" id="themeBtn" aria-label="Toggle dark mode">🌙</button>
+        <button class="icon-btn" id="menuBtn" aria-label="Open menu">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <small id="greeting"></small>
+      <h1>I’m Abenezer Abebe,<br>learning to build <span id="typed"></span></h1>
+      <p>An 18-year-old aspiring web developer, learning HTML, CSS and JavaScript one small project at a time.</p>
+      <a class="btn" href="#projects">View my work</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+
+    <section id="about"><div class="wrap">
+      <h2>About me</h2>
+      <div class="grid">
+        <img src="https://www.w3schools.com/html/pic_trulli.jpg" alt="Trulli houses in Alberobello, Italy" width="400">
+        <div>
+          <p>Hi! I’m a beginner who decided to become a website developer. I study every day with free resources like W3Schools, The Odin Project and freeCodeCamp, and I practice by building real pages.</p>
+          <p>My goal: build and publish websites that people can use.</p>
+          <p>Favorite foods: shiro, doro wot, pizza, pasta and kitfo.</p>
+        </div>
+      </div>
+      <div class="stats">
+        <div><b id="statDays">0</b><span>Days learning</span></div>
+        <div><b id="statProj">0</b><span>Projects</span></div>
+        <div><b id="statLang">0</b><span>Languages</span></div>
+      </div>
+    </div></section>
+
+    <section id="skills"><div class="wrap">
+      <h2>Skills (in progress)</h2>
+      <div class="card">
+        <div class="skill"><div class="skill-top"><span>HTML</span><span>60%</span></div><div class="bar"><i data-w="60"></i></div></div>
+        <div class="skill"><div class="skill-top"><span>CSS</span><span>30%</span></div><div class="bar"><i data-w="30"></i></div></div>
+        <div class="skill"><div class="skill-top"><span>JavaScript</span><span>15%</span></div><div class="bar"><i data-w="15"></i></div></div>
+        <div class="skill"><div class="skill-top"><span>Git &amp; GitHub</span><span>20%</span></div><div class="bar"><i data-w="20"></i></div></div>
+      </div>
+    </div></section>
+
+    <section id="projects"><div class="wrap">
+      <h2>Projects</h2>
+      <div class="grid">
+        <div class="card"><h3>My First Page</h3><p>Paragraphs, links and an image built in the W3Schools editor.</p><span class="tag">HTML</span></div>
+        <div class="card"><h3>This Portfolio</h3><p>A responsive site with dark mode, animations and a contact form.</p><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span></div>
+        <div class="card"><h3>Coming soon</h3><p>A to-do list app and a small quiz game.</p><span class="tag">Planned</span></div>
+      </div>
+    </div></section>
+
+    <section id="journey"><div class="wrap">
+      <h2>Learning journey</h2>
+      <table>
+        <tr><th>Day</th><th>Topic</th><th>Status</th></tr>
+        <tr><td>1</td><td>Headings and text</td><td class="done">Done</td></tr>
+        <tr><td>2</td><td>Lists</td><td class="done">Done</td></tr>
+        <tr><td>3</td><td>Tables</td><td>Next</td></tr>
+        <tr><td>4</td><td>Div, images and links</td><td>Planned</td></tr>
+        <tr><td>5</td><td>CSS basics</td><td>Planned</td></tr>
+        <tr><td>6</td><td>Forms</td><td>Planned</td></tr>
+        <tr><td>7</td><td>Final project</td><td>Planned</td></tr>
+      </table>
+      <h3>Track my week (tap to check)</h3>
+      <ul class="check">
+        <li><label><input type="checkbox" class="done-box"> Day 3: Tables</label></li>
+        <li><label><input type="checkbox" class="done-box"> Day 4: Div, images and links</label></li>
+        <li><label><input type="checkbox" class="done-box"> Day 5: CSS basics</label></li>
+        <li><label><input type="checkbox" class="done-box"> Day 6: Forms</label></li>
+        <li><label><input type="checkbox" class="done-box"> Day 7: Final project</label></li>
+      </ul>
+      <div class="bar" id="progressBar"><i id="progressFill"></i></div>
+      <p id="progressText"></p>
+    </div></section>
+
+    <section id="contact"><div class="wrap">
+      <h2>Contact</h2>
+      <div class="card">
+        <label for="name">Name</label>
+        <input id="name" type="text" placeholder="Your name">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com">
+        <label for="msg">Message</label>
+        <textarea id="msg" rows="4" placeholder="Say hello..."></textarea>
+        <button class="btn" id="sendBtn">Send message</button>
+        <p id="formMsg"></p>
+      </div>
+      <p style="color:var(--muted);margin-top:12px">Useful links:
+        <a href="https://www.w3schools.com" target="_blank" rel="noopener">W3Schools</a> ·
+        <a href="https://www.freecodecamp.org" target="_blank" rel="noopener">freeCodeCamp</a> ·
+        <a href="https://www.theodinproject.com" target="_blank" rel="noopener">The Odin Project</a></p>
+    </div></section>
+  </main>
+
+  <footer>© <span id="year"></span> Abenezer Abebe. Built with HTML, CSS and JavaScript.</footer>
+  <button class="icon-btn" id="toTop" aria-label="Back to top">↑</button>
+
+  <!-- ===== JavaScript ===== -->
+  <script>
+    var $ = function (id) { return document.getElementById(id); };
+
+    // 1. Greeting by time of day
+    var h = new Date().getHours();
+    $("greeting").textContent = h < 12 ? "Good morning ☀️" : h < 18 ? "Good afternoon 🌤️" : "Good evening 🌙";
+    $("year").textContent = new Date().getFullYear();
+
+    // 2. Typing effect
+    var words = ["websites.", "apps.", "my future."];
+    var w = 0, c = 0, del = false;
+    function type() {
+      var word = words[w];
+      $("typed").textContent = word.slice(0, c);
+      if (!del && c === word.length) { del = true; setTimeout(type, 1400); return; }
+      if (del && c === 0) { del = false; w = (w + 1) % words.length; }
+      c += del ? -1 : 1;
+      setTimeout(type, del ? 50 : 110);
+    }
+    type();
+
+    // 3. Dark mode (remembers your choice)
+    function setTheme(dark) {
+      document.body.classList.toggle("dark", dark);
+      $("themeBtn").textContent = dark ? "☀️" : "🌙";
+      try { localStorage.setItem("dark", dark ? "1" : "0"); } catch (e) {}
+    }
+    try { setTheme(localStorage.getItem("dark") === "1"); } catch (e) {}
+    $("themeBtn").onclick = function () { setTheme(!document.body.classList.contains("dark")); };
+
+    // 4. Mobile menu
+    $("menuBtn").onclick = function () { $("links").classList.toggle("open"); };
+    $("links").onclick = function () { $("links").classList.remove("open"); };
+
+    // 5. Count-up stats
+    function countUp(id, target) {
+      var n = 0, el = $(id);
+      var t = setInterval(function () {
+        n++; el.textContent = n;
+        if (n >= target) clearInterval(t);
+      }, 60);
+    }
+    countUp("statDays", 7); countUp("statProj", 2); countUp("statLang", 3);
+
+    // 6. Skill bars fill when visible
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.style.width = e.target.dataset.w + "%"; }
+      });
+    });
+    document.querySelectorAll(".bar i[data-w]").forEach(function (b) { obs.observe(b); });
+
+    // 7. Progress tracker
+    var boxes = document.querySelectorAll(".done-box");
+    function updateProgress() {
+      var n = 0;
+      boxes.forEach(function (b) { if (b.checked) n++; });
+      var pct = Math.round(n / boxes.length * 100);
+      $("progressFill").style.width = pct + "%";
+      $("progressText").textContent = n + " of " + boxes.length + " topics done (" + pct + "%)";
+    }
+    boxes.forEach(function (b) { b.onchange = updateProgress; });
+    updateProgress();
+
+    // 8. Contact form check (demo, nothing is sent)
+    $("sendBtn").onclick = function () {
+      var name = $("name").value.trim(), email = $("email").value.trim(), msg = $("msg").value.trim();
+      var out = $("formMsg");
+      if (!name || !email || !msg) { out.className = "err"; out.textContent = "Please fill in all fields."; return; }
+      if (email.indexOf("@") < 1 || email.indexOf(".") < 0) { out.className = "err"; out.textContent = "Please enter a valid email."; return; }
+      out.className = "ok";
+      out.textContent = "Thanks, " + name + "! (Demo only: a real form needs a server.)";
+      $("name").value = ""; $("email").value = ""; $("msg").value = "";
+    };
+
+    // 9. Back-to-top button
+    window.onscroll = function () { $("toTop").style.display = window.scrollY > 400 ? "block" : "none"; };
+    $("toTop").onclick = function () { window.scrollTo({ top: 0, behavior: "smooth" }); };
+  </script>
+  <div style="position:fixed;bottom:20px;left:20px;z-index:9999">
+  <button onclick="alert('Welcome! እንኳን ደህና መጣህ!')" style="padding:12px;background:#6c63ff;color:white;border:0;border-radius:10px">
+    🇪🇹 አማርኛ
+  </button>
+</div>
+</body>
+</html>
